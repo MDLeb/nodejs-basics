@@ -1,5 +1,17 @@
+import {createReadStream} from 'node:fs';
+import {fileURLToPath} from "node:url";
+import path from 'node:path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const filePath = path.resolve(__dirname, 'files', 'fileToRead.txt');
+
 const read = async () => {
-    // Write your code here 
+    const readable = createReadStream(filePath, {encoding: 'utf-8'});
+    readable.on('data', (chunk) => {
+        console.log(chunk);
+    });
 };
 
 await read();

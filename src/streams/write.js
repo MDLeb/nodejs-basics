@@ -1,5 +1,20 @@
+//implement function that writes process.stdin data into file fileToWrite.txt content using Writable Stream
+import {createWriteStream, createReadStream} from 'node:fs';
+import {fileURLToPath} from "node:url";
+import fs from "node:fs";
+import process from "node:process";
+import path from 'node:path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const filePath = path.resolve(__dirname, 'files', 'fileToWrite.txt');
+
 const write = async () => {
-    // Write your code here 
+    const writable = createWriteStream(filePath);
+    process.stdin.on('data', (chunk) => {
+        writable.write(chunk);
+    });
 };
 
 await write();
