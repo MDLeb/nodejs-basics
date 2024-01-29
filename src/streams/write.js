@@ -1,4 +1,4 @@
-import {createWriteStream, createReadStream} from 'node:fs';
+import {createWriteStream} from 'node:fs';
 import {fileURLToPath} from "node:url";
 import process from "node:process";
 import path from 'node:path';
