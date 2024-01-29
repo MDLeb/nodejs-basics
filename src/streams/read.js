@@ -10,7 +10,7 @@ const filePath = path.resolve(__dirname, 'files', 'fileToRead.txt');
 const read = async () => {
     const readable = createReadStream(filePath, {encoding: 'utf-8'});
     readable.on('data', (chunk) => {
-        console.log(chunk);
+        process.stdout.write(chunk);
     });
 };
 

@@ -1,7 +1,5 @@
-//implement function that writes process.stdin data into file fileToWrite.txt content using Writable Stream
 import {createWriteStream, createReadStream} from 'node:fs';
 import {fileURLToPath} from "node:url";
-import fs from "node:fs";
 import process from "node:process";
 import path from 'node:path';
 

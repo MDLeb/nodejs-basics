@@ -8,12 +8,10 @@ const __dirname = path.dirname(__filename);
 
 const filePath = path.resolve(__dirname, 'files', 'fileToCalculateHashFor.txt');
 
-
 const calculateHash = async () => {
     const hash = createHash('sha256');
     const readable = createReadStream(filePath, {encoding: 'utf-8'});
     readable.on('data', (chunk) => {
-        console.log(chunk);
         hash.update(chunk);
         console.log(hash.digest('hex'));
     });
