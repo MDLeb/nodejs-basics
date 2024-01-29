@@ -8,15 +8,14 @@ const __dirname = path.dirname(__filename);
 const workerPath = path.resolve(__dirname, 'worker.js');
 
 const performCalculations = async () => {
-    let result = [];
+    let result = {};
     const cpu = cpus();
-    const workers = [];
 
     cpu.forEach((c, ind) => {
         const worker = new Worker(workerPath, {
-            workerData: 10 + ind,
+            workerData: 100 + ind,
         });
-        workers.push(worker)
+        result[ind] = {'status': null, data: null};
         worker.on('message', (data) => {
             result[ind] = {'status': 'resolved', data};
         });
@@ -24,8 +23,8 @@ const performCalculations = async () => {
             result[ind] = {'status': 'error', 'data': null};
         });
         worker.once('exit', (code) => {
-            if(result.filter(i => !i.status).length === 0){
-                console.log(result);
+            if (Object.values(result).filter(i => !i.status).length === 0) {
+                console.log(Object.values(result));
             }
             if (code !== 0) {
                 throw new Error(`Worker stopped with exit code ${code}`);
